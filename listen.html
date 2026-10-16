@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>혼자 듣기</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<section class="screen on" id="listen">
+  <div class="who" id="who">혼자 듣기</div>
+  <h2 id="ttl">10년 전 그날 밤</h2>
+  <p class="note" id="msg">이어폰을 끼세요. 다른 사람에게 들려주지 마세요.<br>진행 가이드가 '혼자 듣기'를 말할 때만 누르세요.</p>
+  <div class="ring" id="ring">듣기</div>
+  <p class="note" id="after" style="opacity:0;transition:opacity 2s">당신이 들었던 소리입니다.<br>이제 봉인 쪽지를 여세요.</p>
+</section>
+<script>
+(() => {
+  const who = new URLSearchParams(location.search).get("who");
+  const NAMES = { kota: "기리시마 고타", yuki: "다카무라 유키", michi: "오카 미치" };
+  const ring = document.getElementById("ring");
+  if (!NAMES[who]) {
+    document.getElementById("msg").textContent = "인물 책자의 봉인 쪽지 위 QR로 여세요.";
+    ring.style.display = "none";
+    return;
+  }
+  document.getElementById("who").textContent = NAMES[who];
+  let playing = false;
+  ring.addEventListener("click", async () => {
+    if (playing) return;
+    playing = true; ring.classList.add("playing"); ring.textContent = "……";
+    const a = new Audio(`audio/listen_${who}.mp3`);
+    a.addEventListener("ended", () => {
+      ring.classList.remove("playing"); ring.textContent = "다시"; playing = false;
+      document.getElementById("after").style.opacity = 1;
+    });
+    try { await a.play(); } catch (e) { ring.textContent = "소리를 켜고 다시"; playing = false; ring.classList.remove("playing"); }
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+:root {
+  --bg: #0d0b0a;
+  --ink: #e8dcc6;
+  --dim: #9c8f7d;
+  --faint: #5f564b;
+  --red: #c8392b;
+  --red2: #e05a4d;
+  --serif: "Noto Serif KR", "Batang", serif;
+  --jp: "Noto Serif JP", "Noto Serif KR", serif;
+  --noise: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .8  0 0 0 0 .75  0 0 0 0 .7  0 0 0 .07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font-family: var(--serif); }
+body { background-image: var(--noise); overflow: hidden; word-break: keep-all; }
+button { font-family: inherit; }
+
+.screen { position: fixed; inset: 0; display: none; flex-direction: column; align-items: center; justify-content: center; padding: 24px 16px; text-align: center; }
+.screen.on { display: flex; }
+
+/* 시작 */
+#intro { background: radial-gradient(ellipse at 50% 55%, rgba(13,11,10,.72), rgba(13,11,10,.5) 70%), linear-gradient(180deg, rgba(13,11,10,.2), rgba(13,11,10,.9) 85%), url(img/cover.jpg) center / cover; text-shadow: 0 1px 12px #000, 0 0 3px #000; }
+.kicker { font-size: 12px; letter-spacing: .5em; color: var(--dim); }
+h1.title { margin: 14px 0 6px; font-weight: 900; font-size: clamp(34px, 9vw, 64px); letter-spacing: .1em; }
+.sub { font-size: 15px; letter-spacing: .4em; color: var(--red2); font-weight: 700; }
+.note { margin-top: 26px; font-size: 13px; line-height: 1.9; color: var(--dim); max-width: 420px; }
+.btn { margin-top: 28px; padding: 14px 34px; border: 1px solid rgba(232,220,198,.45); background: rgba(13,11,10,.55); color: var(--ink);
+  font-size: 16px; letter-spacing: .3em; cursor: pointer; }
+.btn:active { background: rgba(200,57,43,.25); }
+.btn.red { border-color: rgba(224,90,77,.7); color: #f2c4bd; }
+.toggle { margin-top: 18px; font-size: 13px; color: var(--dim); display: flex; gap: 10px; align-items: center; justify-content: center; cursor: pointer; }
+.toggle i { width: 34px; height: 18px; border-radius: 9px; background: #3a332c; position: relative; }
+.toggle i::after { content: ""; position: absolute; top: 2px; left: 2px; width: 14px; height: 14px; border-radius: 50%; background: #9c8f7d; transition: .2s; }
+.toggle.on i { background: #7a2a22; } .toggle.on i::after { left: 18px; background: #f2c4bd; }
+
+/* 방명록 */
+#guest h2, #hub h2 { font-weight: 900; font-size: 24px; letter-spacing: .15em; margin: 0 0 8px; }
+.guestbook { margin-top: 22px; width: min(420px, 100%); background: #e9dfc7; color: #2a231b; padding: 22px 22px 10px; box-shadow: 0 6px 24px rgba(0,0,0,.6); transform: rotate(-.6deg); }
+.guestbook .head { font-size: 12px; letter-spacing: .3em; color: #6b5d4a; border-bottom: 1px solid #b9a888; padding-bottom: 8px; margin-bottom: 8px; }
+.guestbook input { width: 100%; border: 0; border-bottom: 1px dotted #9a8a6e; background: transparent; padding: 10px 2px; font-family: "Nanum Pen Script", cursive; font-size: 26px; color: #2a231b; outline: none; }
+.guestbook input::placeholder { color: #b5a68a; font-family: var(--serif); font-size: 14px; }
+
+/* 보관소 (게임 중 화면) */
+#hub { justify-content: flex-start; padding-top: 48px; overflow-y: auto; background: linear-gradient(180deg, rgba(13,11,10,.86), rgba(13,11,10,.97) 60%), url(img/village.jpg) center top / cover; }
+.hubhead { font-size: 12px; letter-spacing: .5em; color: var(--dim); }
+.steps { margin-top: 26px; width: min(460px, 100%); display: flex; flex-direction: column; gap: 14px; }
+.step { text-align: left; padding: 16px 18px; border: 1px solid rgba(232,220,198,.22); background: rgba(255,255,255,.02); cursor: pointer; color: var(--ink); }
+.step b { display: block; font-size: 17px; letter-spacing: .08em; }
+.step span { display: block; margin-top: 4px; font-size: 12.5px; color: var(--dim); line-height: 1.6; }
+.step.done { opacity: .45; }
+.step.armed { border-color: rgba(224,90,77,.55); }
+.hubfoot { margin-top: 26px; display: flex; gap: 18px; flex-wrap: wrap; justify-content: center; font-size: 12.5px; color: var(--dim); }
+.hubfoot a { color: var(--dim); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+/* 연출 화면 */
+#show { background: #000; cursor: pointer; }
+#show .line { position: absolute; left: 16px; right: 16px; text-align: center; opacity: 0; transition: opacity 1.6s; font-size: clamp(20px, 5vw, 34px); letter-spacing: .12em; line-height: 1.8; }
+#show .line.on { opacity: 1; }
+#show .line.red { color: var(--red2); }
+#show .line.small { font-size: 14px; color: var(--dim); letter-spacing: .2em; }
+#show .name { font-family: "Nanum Pen Script", cursive; font-size: clamp(34px, 9vw, 60px); color: #d8cbb2; letter-spacing: .25em; }
+#show .name span { opacity: 0; transition: opacity .9s; } #show .name span.on { opacity: 1; }
+#show .line.tiny { font-family: "Nanum Pen Script", cursive; font-size: 30px; color: #8d806d; letter-spacing: .2em; }
+#show .line.hint { z-index: 3; font-size: 14px; color: #c9bba4; letter-spacing: .12em; text-shadow: 0 0 8px #000, 0 0 2px #000; }
+.photo { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; background: #000; opacity: 0; transition: opacity 3s; }
+.photo.on { opacity: 1; }
+/* 사진 비율 그대로 두고, 붉은 점(사진 속 66.2% · 63.8%)을 기준으로 확대하며 화면 가운데로 끌어온다 */
+.photo .frame { position: relative; width: min(100vw, 149vh); aspect-ratio: 1800 / 1208; flex: none; transform-origin: 66.2% 63.8%; transition: transform 22s cubic-bezier(.3,0,.2,1); }
+.photo.zoom .frame { transform: translate(-16.2%, -13.8%) scale(4.4); }
+.photo .frame img { display: block; width: 100%; height: 100%; filter: grayscale(1) contrast(1.05); }
+.photo .dot { position: absolute; left: 66.2%; top: 63.8%; width: 2.4px; height: 2.4px; margin: -1.2px; border-radius: 50%; background: #b3170d; box-shadow: 0 0 1.5px .8px rgba(179,23,13,.55); }
+.photo::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 34%; background: linear-gradient(180deg, transparent, rgba(0,0,0,.82)); pointer-events: none; }
+.photo .caption { position: absolute; bottom: 17%; left: 16px; right: 16px; z-index: 2; text-align: center; font-size: clamp(16px, 3.6vw, 21px); letter-spacing: .15em; color: #e0d3bc; text-shadow: 0 0 10px #000, 0 0 3px #000; opacity: 0; transition: opacity 2s; }
+.photo .caption.on { opacity: 1; }
+.flicker { animation: flick .35s steps(2) 2; }
+@keyframes flick { 0% { filter: brightness(1.8); } 50% { filter: brightness(.2); } 100% { filter: none; } }
+
+/* 혼자 듣기 */
+#listen .who { font-size: 13px; letter-spacing: .5em; color: var(--dim); }
+#listen h2 { font-weight: 900; font-size: 26px; letter-spacing: .12em; margin: 10px 0 0; }
+.ring { margin-top: 36px; width: 128px; height: 128px; border-radius: 50%; border: 1px solid rgba(232,220,198,.35); display: flex; align-items: center; justify-content: center; font-size: 14px; letter-spacing: .3em; cursor: pointer; }
+.ring.playing { animation: pulse 2.4s ease-in-out infinite; border-color: rgba(224,90,77,.6); }
+@keyframes pulse { 50% { box-shadow: 0 0 0 14px rgba(224,90,77,.08); } }

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>미카게 마을 기록 보관소</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&family=Noto+Serif+JP:wght@400&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="screen on" id="intro">
+  <div class="kicker">미카게 마을 기록 보관소 · 1968</div>
+  <h1 class="title">대답하지 마라</h1>
+  <div class="sub">마을 기록 보관소</div>
+  <p class="note">이 화면은 테이블 가운데 두세요.<br>소리를 켜고, 방 불을 끄고, 스탠드 하나만 켜면 가장 좋습니다.<br>게임 중에 이 화면이 소리를 낼 때가 있습니다.<br>휴대폰이라면 무음 모드를 꺼 주세요.</p>
+  <button class="btn" id="btnStart">문을 연다</button>
+  <div class="toggle" id="tgQuiet"><i></i>조용한 모드 (깜짝 놀라는 소리 끄기)</div>
+</section>
+
+<section class="screen" id="guest">
+  <h2>마을 방명록</h2>
+  <p class="note">오늘 밤 이 자리에 앉은 사람의 이름을 적어 주세요.<br><b style="color:#e8dcc6">인물 이름이 아니라, 당신의 이름입니다.</b></p>
+  <div class="guestbook">
+    <div class="head">1968년 8월 16일 · 방문한 사람</div>
+    <input id="g1" placeholder="첫 번째 사람" maxlength="12" autocomplete="off">
+    <input id="g2" placeholder="두 번째 사람" maxlength="12" autocomplete="off">
+    <input id="g3" placeholder="세 번째 사람" maxlength="12" autocomplete="off">
+  </div>
+  <button class="btn" id="btnGuest">적었습니다</button>
+</section>
+
+<section class="screen" id="hub">
+  <div class="hubhead">미카게 마을 기록 보관소</div>
+  <h2 style="margin-top:12px">진행 가이드가 말할 때 누르세요</h2>
+  <div class="steps">
+    <div class="step" id="stBroadcast"><b>01:00 방송</b><span>막간. 진행 가이드를 소리 내어 읽은 뒤 누릅니다.</span></div>
+    <div class="step" id="stSecond"><b>2차 토론 시작</b><span>6단계. 2차 토론을 시작할 때 누릅니다.</span></div>
+    <div class="step" id="stEnding"><b>1958년 테이프</b><span>11단계. '에필로그'와 '후미의 메모'를 다 읽은 뒤 누릅니다.</span></div>
+  </div>
+  <div class="hubfoot">
+    <a id="lnAmb">배경음 끄기</a>
+    <a id="lnQuiet">조용한 모드: 꺼짐</a>
+    <a id="lnGuest">방명록 다시 쓰기</a>
+    <a id="lnReset">처음부터</a>
+  </div>
+</section>
+
+<section class="screen" id="show"></section>
+
+<script src="app.js"></script>
+</body>
+</html>
