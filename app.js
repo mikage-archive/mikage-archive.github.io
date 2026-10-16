@@ -60,7 +60,11 @@
     }
     const peak = Math.max(...env), on = []; let active = false;
     env.forEach((e, k) => {
-      if (e > peak * 0.3 && !active) { on.push((k * win / 2) / sr); active = true; }
+      if (e > peak * 0.3 && !active) {
+        const t = (k * win / 2) / sr;
+        if (!on.length || t - on[on.length - 1] >= 1) on.push(t);  // 한 이름의 음절을 두 번 세지 않게
+        active = true;
+      }
       else if (e < peak * 0.105 && active) active = false;
     });
     return on.slice(0, n);
